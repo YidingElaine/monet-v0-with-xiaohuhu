@@ -36,13 +36,13 @@ if __name__ ==  "__main__":
     Tensor = torch.cuda.FloatTensor if cuda else torch.Tensor
     # Networks
     netG_A2B = Generator(3, 3)
+    # load  the trained model
     state_dict = torch.load(generator)
     from collections import OrderedDict
     new_state_dict = OrderedDict()
     for k, v in state_dict.items():
         name = k[7:] # remove module.
         new_state_dict[name] = v
-    # netG_A2B.load_state_dict(torch.load(new_state_dict))
     netG_A2B.load_state_dict(new_state_dict)
     
     netG_A2B.eval()
